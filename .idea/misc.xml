@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/admin/AndroidStudioProjects/AnimeThing/app/src/main/res/font-v26/lobster_regular.xml" value="0.27395833333333336" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/AnimeThing/app/src/main/res/font/font.xml" value="0.27395833333333336" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/AnimeThing/app/src/main/res/font/lobster_regular.xml" value="1.8785714285714286" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/AnimeThing/app/src/main/res/font/nexa.xml" value="0.27395833333333336" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/AnimeThing/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/AnimeThing/app/src/main/res/layout/anime_details_bottom_sheet_layout.xml" value="0.35733695652173914" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/AnimeThing/app/src/main/res/layout/anime_details_button_sheet_layout.xml" value="0.24375" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/AnimeThing/app/src/main/res/layout/anime_item_layout.xml" value="0.25885416666666666" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/AnimeThing/app/src/main/res/layout/anime_list.xml" value="0.24375" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/AnimeThing/app/src/main/res/layout/animelist.xml" value="0.24375" />
+        <entry key="..\:/Users/nkauj/Desktop/AnimeThing/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/nkauj/Desktop/AnimeThing/app/src/main/res/layout/anime_item_layout.xml" value="0.25" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
