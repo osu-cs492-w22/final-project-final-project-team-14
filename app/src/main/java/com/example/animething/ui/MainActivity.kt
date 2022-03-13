@@ -1,5 +1,6 @@
 package com.example.animething.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,6 +15,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
+
+    //private val animeAdapter = AnimeAdapter(::onAnimeClick, )
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +36,8 @@ class MainActivity : AppCompatActivity() {
                         // RecyclerView can be found in activtiy_main.xml
                         animeRecyclerView.layoutManager = GridLayoutManager(this@MainActivity, 3)
                         animeRecyclerView.setHasFixedSize(true)
-                        animeRecyclerView.adapter = AnimeAdapter(topAnimes)
+                        animeRecyclerView.adapter = AnimeAdapter(::onAnimeClick, topAnimes)
+
                         //animeRecyclerView.setAdapter(AnimeAdapter(topAnimes))
                     }
                 }
@@ -42,5 +46,12 @@ class MainActivity : AppCompatActivity() {
                 }
             })
         }
+    }
+
+    private fun onAnimeClick(anime: DisplayAnimeList){
+        val intent = Intent(this, AnimeDetailActivity::class.java).apply {
+            putExtra(EXTRA_ANIME_INFO, anime)
+        }
+        startActivity(intent)
     }
 }

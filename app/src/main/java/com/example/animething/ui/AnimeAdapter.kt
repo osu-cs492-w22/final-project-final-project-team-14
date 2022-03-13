@@ -10,25 +10,43 @@ import com.example.animething.data.DisplayAnimeList
 import com.example.animething.data.TopAnime
 import com.squareup.picasso.Picasso
 
-class AnimeAdapter (private val animeList: List<DisplayAnimeList>):
-    RecyclerView.Adapter<AnimeAdapter.ViewHolder>() {
+class AnimeAdapter (private val onAnimeClick: (DisplayAnimeList) -> Unit, private var animeList: List<DisplayAnimeList>)
+    : RecyclerView.Adapter<AnimeAdapter.ViewHolder>() {
+    //var animeList: List<DisplayAnimeList> = listOf()
+
+    fun updateAnimeList(newAnimeList: TopAnime?) {
+        animeList = newAnimeList?.data ?: listOf()
+        notifyDataSetChanged()
+    }
 
     override fun getItemCount() = this.animeList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.anime_item_layout,parent,false)
-        return ViewHolder(view)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.anime_item_layout,parent,false)
+        return ViewHolder(view, onAnimeClick)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(this.animeList[position])
     }
 
-    class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View, val onAnimeClick: (DisplayAnimeList) -> Unit)
+            : RecyclerView.ViewHolder(view) {
         private val name = view.findViewById<TextView>(R.id.name)
         private val image = view.findViewById<ImageView>(R.id.image)
 
+        private var currentAnime: DisplayAnimeList? = null
+
+        init {
+            view.setOnClickListener {
+                currentAnime?.let(onAnimeClick)
+            }
+        }
+
         fun bind(anime: DisplayAnimeList) {
+            currentAnime = anime
+
             name.text = anime.title
             // https://square.github.io/picasso/
             Picasso.get().load(anime.images.jpg.image_url).into(image)

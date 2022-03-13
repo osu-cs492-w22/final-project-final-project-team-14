@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AnimeThing">
         <activity
+            android:name=".ui.AnimeDetailActivity"
+            android:parentActivityName=".ui.MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
