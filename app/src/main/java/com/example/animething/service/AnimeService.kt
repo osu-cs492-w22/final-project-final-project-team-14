@@ -1,12 +1,11 @@
 package com.example.animething.service
 
 
-import com.example.animething.TopAnime
+import com.example.animething.data.TopAnime
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Query
 
 interface AnimeService {
     @GET("top/anime")
@@ -14,7 +13,7 @@ interface AnimeService {
     fun getTopAnime(): Call<TopAnime>
     
     companion object {
-        val BASE_URL = "https://api.jikan.moe/v3/"
+        val BASE_URL = "https://api.jikan.moe/v4/"
         fun create(): AnimeService {
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())

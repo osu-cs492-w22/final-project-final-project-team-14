@@ -15,6 +15,10 @@
         <entry key="..\:/Users/admin/AndroidStudioProjects/AnimeThing/app/src/main/res/layout/animelist.xml" value="0.24375" />
         <entry key="..\:/Users/nkauj/Desktop/AnimeThing/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/nkauj/Desktop/AnimeThing/app/src/main/res/layout/anime_item_layout.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_anime_detail.xml" value="0.4142857142857143" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.10740740740740741" />
+        <entry key="app/src/main/res/layout/anime_item_layout.xml" value="0.10740740740740741" />
+        <entry key="app/src/main/res/layout/anime_list.xml" value="0.10740740740740741" />
       </map>
     </option>
   </component>

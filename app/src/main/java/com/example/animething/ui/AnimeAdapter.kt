@@ -1,5 +1,4 @@
 package com.example.animething.ui
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,7 +6,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.animething.R
-import com.example.animething.DisplayAnimeList
+import com.example.animething.data.DisplayAnimeList
+import com.example.animething.data.TopAnime
 import com.squareup.picasso.Picasso
 
 class AnimeAdapter (private val animeList: List<DisplayAnimeList>):
@@ -31,7 +31,7 @@ class AnimeAdapter (private val animeList: List<DisplayAnimeList>):
         fun bind(anime: DisplayAnimeList) {
             name.text = anime.title
             // https://square.github.io/picasso/
-            Picasso.get().load(anime.image_url).into(image)
+            Picasso.get().load(anime.images.jpg.image_url).into(image)
         }
     }
 }
