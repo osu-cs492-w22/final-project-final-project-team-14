@@ -8,6 +8,8 @@
     android:padding="8dp"
     tools:context=".ui.MainActivity">
 
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/animeRecyclerView"
         android:layout_marginTop="8dp"

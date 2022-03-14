@@ -16,7 +16,7 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
-    //private val animeAdapter = AnimeAdapter(::onAnimeClick, )
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
