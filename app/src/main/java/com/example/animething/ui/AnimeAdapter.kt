@@ -10,12 +10,12 @@ import com.example.animething.data.DisplayAnimeList
 import com.example.animething.data.TopAnime
 import com.squareup.picasso.Picasso
 
-class AnimeAdapter (private val onAnimeClick: (DisplayAnimeList) -> Unit, private var animeList: List<DisplayAnimeList>)
+class AnimeAdapter(private val onAnimeClick: (DisplayAnimeList) -> Unit)
     : RecyclerView.Adapter<AnimeAdapter.ViewHolder>() {
-    //var animeList: List<DisplayAnimeList> = listOf()
+    var animeList: List<DisplayAnimeList> = listOf()
 
-    fun updateAnimeList(newAnimeList: TopAnime?) {
-        animeList = newAnimeList?.data ?: listOf()
+    fun updateAnimeList(newAnimeList: List<DisplayAnimeList>) {
+        animeList = newAnimeList.toMutableList()
         notifyDataSetChanged()
     }
 

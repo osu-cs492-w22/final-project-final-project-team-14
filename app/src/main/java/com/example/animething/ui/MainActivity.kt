@@ -3,33 +3,46 @@ package com.example.animething.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.animething.R
+import com.example.animething.data.AnimeRepository
 import com.example.animething.data.DisplayAnimeList
-import com.example.animething.data.TopAnime
 import com.example.animething.databinding.ActivityMainBinding
 import com.example.animething.service.AnimeService
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
+//Reference: The ViewModel Architecture implementation is based on an online tutorial source
+//Source: https://howtodoandroid.com/mvvm-retrofit-recyclerview-kotlin/
+
 
 class MainActivity : AppCompatActivity() {
 
-
-
+    private lateinit var binding: ActivityMainBinding
+    lateinit var viewModel: AnimeViewModel
+    val animeService = AnimeService.create()
+    val adapter = AnimeAdapter(::onAnimeClick)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        viewModel = ViewModelProvider(this, AnimeViewModelFactory(AnimeRepository(animeService))).get(AnimeViewModel::class.java)
+        //binding.animeRecyclerView.adapter = adapter
         // View (binding) is used to interact with views and replaces findViewById
         binding.apply {
-            val animeService = AnimeService.create()
-            val call = animeService.getTopAnime()
+            //val animeService = AnimeService.create()
+            //val call = animeService.getTopAnime()
+            //viewModel.getAnimes()
 
-            call.enqueue(object : Callback<TopAnime> {
+            animeRecyclerView.layoutManager = GridLayoutManager(this@MainActivity, 3)
+            animeRecyclerView.setHasFixedSize(true)
+            animeRecyclerView.adapter = adapter
+
+
+            /*call.enqueue(object : Callback<TopAnime> {
                 override fun onResponse(call: Call<TopAnime>, response: Response<TopAnime>) {
                     if (response.body() != null) {
                         val topAnimes = response.body()!!.data
@@ -44,8 +57,14 @@ class MainActivity : AppCompatActivity() {
                 override fun onFailure(call: Call<TopAnime>, t: Throwable) {
 
                 }
-            })
+            })*/
         }
+        viewModel.animes.observe(this, Observer {
+
+            adapter.updateAnimeList(it)
+        })
+
+        viewModel.getAnimes()
     }
 
     private fun onAnimeClick(anime: DisplayAnimeList){
