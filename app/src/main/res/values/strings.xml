@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AnimeThing</string>
+    <string name="action_random">Random Anime</string>
+    <string name="score_label">Score: </string>
 </resources>

@@ -16,6 +16,10 @@
             android:parentActivityName=".ui.MainActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.RandomAnimeActivity"
+            android:parentActivityName=".ui.MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.AnimeBookmarksActivity"
             android:parentActivityName=".ui.MainActivity"
             android:exported="false" />

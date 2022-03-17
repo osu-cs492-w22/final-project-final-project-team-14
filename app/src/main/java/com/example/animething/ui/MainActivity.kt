@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageButton
 import androidx.activity.viewModels
@@ -88,11 +90,35 @@ class MainActivity : AppCompatActivity() {
         })
 
         viewModel.getAnimes()
+        viewModel.getRandomAnime()
     }
 
     private fun onAnimeClick(anime: DisplayAnimeList){
         val intent = Intent(this, AnimeDetailActivity::class.java).apply {
             putExtra(EXTRA_ANIME_INFO, anime)
+        }
+        startActivity(intent)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.activity_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.action_random -> {
+                randomAnime()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun randomAnime(){
+        viewModel.getRandomAnime()
+        val intent = Intent(this, RandomAnimeActivity::class.java).apply {
+            putExtra(RANDOM_ANIME_INFO, viewModel.randomAnime.value)
         }
         startActivity(intent)
     }

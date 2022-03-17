@@ -1,6 +1,7 @@
 package com.example.animething.service
 
 
+import com.example.animething.data.RandomAnime
 import com.example.animething.data.TopAnime
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -11,6 +12,9 @@ interface AnimeService {
     @GET("top/anime")
     // Call is a RetroFit2 function that sends a request and returns a response
     fun getTopAnime(): Call<TopAnime>
+
+    @GET("random/anime")
+    fun getRandomAnime(): Call<RandomAnime>
     
     companion object {
         val BASE_URL = "https://api.jikan.moe/v4/"

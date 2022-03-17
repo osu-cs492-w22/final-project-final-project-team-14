@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--This layout has been orgainized slightly in the push of bookmarks-->
+<!--This layout has been updated again with random feature-->
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -15,70 +16,108 @@
         android:orientation="vertical"
         android:padding="8dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_anime_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="20sp"
+                android:text="@string/score_label"
+                android:paddingBottom="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:id="@+id/iv_anime_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:paddingEnd="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_anime_title"
+                app:layout_constraintBottom_toTopOf="@id/barrier"
+                app:layout_constraintBottom_toBottomOf="@id/tv_anime_status"/>
 
-                <ImageView
-                    android:id="@+id/iv_anime_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <ImageButton
-                    android:id="@+id/bookmark_button_detail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#A6000000"
-                    android:minWidth="48dp"
-                    android:minHeight="48dp"
-                    android:src="@drawable/ic_baseline_bookmark_24" />
-            </LinearLayout>
-
-            <LinearLayout
+            <ImageButton
+                android:id="@+id/bookmark_button_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:background="#A6000000"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:src="@drawable/ic_baseline_bookmark_24"
+                app:layout_constraintTop_toBottomOf="@id/iv_anime_image"
+                app:layout_constraintStart_toStartOf="parent"/>
 
-                <TextView
-                    android:id="@+id/tv_anime_score"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?attr/textAppearanceHeadline4" />
+            <TextView
+                android:id="@+id/tv_anime_score_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline4"
+                android:textSize="20sp"
+                android:text="@string/score_label"
+                android:paddingRight="2dp"
+                app:layout_constraintStart_toEndOf="@id/iv_anime_image"
+                app:layout_constraintTop_toBottomOf="@id/tv_anime_title"/>
 
-                <TextView
-                    android:id="@+id/tv_anime_genre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?attr/textAppearanceHeadline4" />
+            <TextView
+                android:id="@+id/tv_anime_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline4"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@id/tv_anime_score_label"
+                app:layout_constraintTop_toBottomOf="@id/tv_anime_title"/>
 
-                <TextView
-                    android:id="@+id/tv_anime_episode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?attr/textAppearanceHeadline4" />
+            <TextView
+                android:id="@+id/tv_anime_genre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline4"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@id/iv_anime_image"
+                app:layout_constraintTop_toBottomOf="@id/tv_anime_score"/>
 
-                <TextView
-                    android:id="@+id/tv_anime_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?attr/textAppearanceHeadline4"/>
-            </LinearLayout>
-        </LinearLayout>
+            <TextView
+                android:id="@+id/tv_anime_episode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline4"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@id/iv_anime_image"
+                app:layout_constraintTop_toBottomOf="@id/tv_anime_genre"/>
 
-        <TextView
-            android:id="@+id/tv_anime_synopsis"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceBody1"/>
+            <TextView
+                android:id="@+id/tv_anime_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline4"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@id/iv_anime_image"
+                app:layout_constraintTop_toBottomOf="@id/tv_anime_episode" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:layout_constraintTop_toBottomOf="@id/iv_anime_image"/>
+
+            <TextView
+                android:id="@+id/tv_anime_synopsis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceBody1"
+                android:paddingTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bookmark_button_detail"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
