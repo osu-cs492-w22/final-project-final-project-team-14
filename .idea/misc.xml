@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/15033/Documents/CS 492 2022/final group proj bookmark catch-up/app/src/main/res/layout/activity_anime_bookmarks.xml" value="0.32608695652173914" />
+        <entry key="..\:/Users/15033/Documents/CS 492 2022/final group proj bookmark catch-up/app/src/main/res/layout/activity_anime_detail.xml" value="0.32608695652173914" />
+        <entry key="..\:/Users/15033/Documents/CS 492 2022/final group proj bookmark catch-up/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/15033/Documents/CS 492 2022/final group proj bookmark catch-up/app/src/main/res/layout/anime_item_layout.xml" value="0.32608695652173914" />
+        <entry key="..\:/Users/15033/Documents/CS 492 2022/final group proj bookmark catch-up/app/src/main/res/layout/bookmark_item_layout.xml" value="0.32608695652173914" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/AnimeThing/app/src/main/res/font-v26/lobster_regular.xml" value="0.27395833333333336" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/AnimeThing/app/src/main/res/font/font.xml" value="0.27395833333333336" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/AnimeThing/app/src/main/res/font/lobster_regular.xml" value="1.8785714285714286" />

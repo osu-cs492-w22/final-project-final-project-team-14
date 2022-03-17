@@ -5,24 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
-    tools:context=".ui.MainActivity">
-
-<!--bookmarks button, replace this with a nav bar maybe at some point?-->
-    <Button
-        android:id="@+id/bookmark_nav_button"
-        android:text="Bookmarks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+    android:padding="8dp">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/animeRecyclerView"
+        android:id="@+id/bookmark_recycler_view"
         android:layout_marginTop="8dp"
         tools:itemCount="4"
-        tools:listitem="@layout/anime_item_layout"
-        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/bookmark_item_layout"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="0dp" >
     </androidx.recyclerview.widget.RecyclerView>

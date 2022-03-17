@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.devtools.ksp' version '1.6.10-1.0.2'
 }
 
 android {
@@ -62,4 +63,9 @@ dependencies {
     implementation 'com.squareup.okio:okio:2.10.0'
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
     implementation 'androidx.browser:browser:1.4.0'
+
+    implementation 'com.google.devtools.ksp:symbol-processing-api:1.6.10-1.0.3'
+    implementation 'androidx.room:room-runtime:2.4.2'
+    implementation 'androidx.room:room-ktx:2.4.2'
+    ksp 'androidx.room:room-compiler:2.4.2'
 }
