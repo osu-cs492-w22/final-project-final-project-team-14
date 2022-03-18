@@ -18,6 +18,25 @@
         <entry key="..\:/Users/admin/AndroidStudioProjects/AnimeThing/app/src/main/res/layout/anime_item_layout.xml" value="0.25885416666666666" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/AnimeThing/app/src/main/res/layout/anime_list.xml" value="0.24375" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/AnimeThing/app/src/main/res/layout/animelist.xml" value="0.24375" />
+        <entry key="..\:/Users/krist/Documents/Classwork/CS-492/final-project-final-project-team-14/app/src/main/res/drawable/ic_action_settings.xml" value="0.199" />
+        <entry key="..\:/Users/krist/Documents/Classwork/CS-492/final-project-final-project-team-14/app/src/main/res/drawable/ic_action_share.xml" value="0.199" />
+        <entry key="..\:/Users/krist/Documents/Classwork/CS-492/final-project-final-project-team-14/app/src/main/res/drawable/ic_baseline_bookmark_24.xml" value="0.1645" />
+        <entry key="..\:/Users/krist/Documents/Classwork/CS-492/final-project-final-project-team-14/app/src/main/res/drawable/ic_baseline_bookmark_24_selected.xml" value="0.1645" />
+        <entry key="..\:/Users/krist/Documents/Classwork/CS-492/final-project-final-project-team-14/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.199" />
+        <entry key="..\:/Users/krist/Documents/Classwork/CS-492/final-project-final-project-team-14/app/src/main/res/drawable/ic_channel_background.xml" value="0.1645" />
+        <entry key="..\:/Users/krist/Documents/Classwork/CS-492/final-project-final-project-team-14/app/src/main/res/drawable/ic_channel_foreground.xml" value="0.1645" />
+        <entry key="..\:/Users/krist/Documents/Classwork/CS-492/final-project-final-project-team-14/app/src/main/res/drawable/ic_random.xml" value="0.1645" />
+        <entry key="..\:/Users/krist/Documents/Classwork/CS-492/final-project-final-project-team-14/app/src/main/res/layout/activity_anime_bookmarks.xml" value="0.31354166666666666" />
+        <entry key="..\:/Users/krist/Documents/Classwork/CS-492/final-project-final-project-team-14/app/src/main/res/layout/activity_anime_detail.xml" value="0.1" />
+        <entry key="..\:/Users/krist/Documents/Classwork/CS-492/final-project-final-project-team-14/app/src/main/res/layout/activity_main.xml" value="0.1933876811594203" />
+        <entry key="..\:/Users/krist/Documents/Classwork/CS-492/final-project-final-project-team-14/app/src/main/res/layout/activity_random_anime_detail.xml" value="0.31354166666666666" />
+        <entry key="..\:/Users/krist/Documents/Classwork/CS-492/final-project-final-project-team-14/app/src/main/res/layout/activity_setting.xml" value="0.31354166666666666" />
+        <entry key="..\:/Users/krist/Documents/Classwork/CS-492/final-project-final-project-team-14/app/src/main/res/layout/bookmark_item_layout.xml" value="0.32065217391304346" />
+        <entry key="..\:/Users/krist/Documents/Classwork/CS-492/final-project-final-project-team-14/app/src/main/res/menu/activity_anime_detail.xml" value="0.3933333333333333" />
+        <entry key="..\:/Users/krist/Documents/Classwork/CS-492/final-project-final-project-team-14/app/src/main/res/menu/activity_main.xml" value="0.3933333333333333" />
+        <entry key="..\:/Users/krist/Documents/Classwork/CS-492/final-project-final-project-team-14/app/src/main/res/mipmap-anydpi-v26/ic_channel.xml" value="0.1645" />
+        <entry key="..\:/Users/krist/Documents/Classwork/CS-492/final-project-final-project-team-14/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1645" />
+        <entry key="..\:/Users/krist/Documents/Classwork/CS-492/final-project-final-project-team-14/app/src/main/res/xml/settings.xml" value="0.31354166666666666" />
         <entry key="..\:/Users/nkauj/Desktop/AnimeThing/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/nkauj/Desktop/AnimeThing/app/src/main/res/layout/anime_item_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_anime_detail.xml" value="0.4142857142857143" />

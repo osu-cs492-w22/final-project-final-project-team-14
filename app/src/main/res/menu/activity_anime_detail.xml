@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_random"
-        android:icon="@drawable/ic_random"
-        android:title="@string/action_random"
-        app:showAsAction="ifRoom" />
+        android:id="@+id/action_view_anime"
+        android:title="@string/action_share"
+        app:showAsAction="never" />
 </menu>

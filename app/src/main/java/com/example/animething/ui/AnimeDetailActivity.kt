@@ -1,7 +1,11 @@
 package com.example.animething.ui
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -28,8 +32,8 @@ class AnimeDetailActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.tv_anime_title).text = animeInfo!!.title
             Picasso.get().load(animeInfo!!.images.jpg.image_url).into(findViewById<ImageView>(R.id.iv_anime_image))
             findViewById<TextView>(R.id.tv_anime_score).text = animeInfo!!.score.toString() + "/10"
-            if (animeInfo!!.score < 4) findViewById<TextView>(R.id.tv_anime_score).setTextColor(Color.RED)
-            if (animeInfo!!.score > 7) findViewById<TextView>(R.id.tv_anime_score).setTextColor(Color.GREEN)
+            //if (animeInfo!!.score < 4) findViewById<TextView>(R.id.tv_anime_score).setTextColor(Color.RED)
+            //if (animeInfo!!.score > 7) findViewById<TextView>(R.id.tv_anime_score).setTextColor(Color.GREEN)
             if (animeInfo!!.genres.isNotEmpty()) findViewById<TextView>(R.id.tv_anime_genre).text = "Genre: " + animeInfo!!.genres[0].name
             findViewById<TextView>(R.id.tv_anime_episode).text = "Episodes: " + animeInfo!!.episodes.toString()
             findViewById<TextView>(R.id.tv_anime_status).text = "Status: " + animeInfo!!.status
@@ -65,6 +69,28 @@ class AnimeDetailActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.activity_anime_detail, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_view_anime -> {
+                viewAnimeOnMAL()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun viewAnimeOnMAL() {
+        val url = animeInfo!!.url
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
     }
 
 

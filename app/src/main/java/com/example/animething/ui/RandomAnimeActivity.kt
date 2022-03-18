@@ -2,6 +2,7 @@ package com.example.animething.ui
 
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.Menu
@@ -17,6 +18,7 @@ import com.example.animething.R
 import com.example.animething.data.AnimeRepository
 import com.example.animething.data.DisplayAnimeList
 import com.example.animething.service.AnimeService
+import com.example.animething.service.SearchService
 import com.squareup.picasso.Picasso
 
 const val RANDOM_ANIME_INFO = "com.example.animething.DisplayAnimeList"
@@ -26,6 +28,7 @@ class RandomAnimeActivity  : AppCompatActivity() {
 
     lateinit var viewModel: AnimeViewModel
     val animeService = AnimeService.create()
+    val searchService = SearchService.create()
 
 
     private val bookmarksViewModel: AnimeBookmarkViewModel by viewModels()
@@ -35,7 +38,7 @@ class RandomAnimeActivity  : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_random_anime_detail)
 
-        viewModel = ViewModelProvider(this, AnimeViewModelFactory(AnimeRepository(animeService))).get(AnimeViewModel::class.java)
+        viewModel = ViewModelProvider(this, AnimeViewModelFactory(AnimeRepository(animeService, searchService))).get(AnimeViewModel::class.java)
         viewModel.getRandomAnime()
 
 
@@ -44,9 +47,9 @@ class RandomAnimeActivity  : AppCompatActivity() {
             findViewById<TextView>(R.id.tv_anime_title).text = animeInfo!!.title
             Picasso.get().load(animeInfo!!.images.jpg.image_url).into(findViewById<ImageView>(R.id.iv_anime_image))
             findViewById<TextView>(R.id.tv_anime_score).text = animeInfo!!.score.toString() + "/10"
-            if (animeInfo!!.score < 4) findViewById<TextView>(R.id.tv_anime_score).setTextColor(Color.RED)
+            /*if (animeInfo!!.score?.compareTo(4) > 0) findViewById<TextView>(R.id.tv_anime_score).setTextColor(Color.RED)
             else if (animeInfo!!.score > 7) findViewById<TextView>(R.id.tv_anime_score).setTextColor(Color.GREEN)
-            else findViewById<TextView>(R.id.tv_anime_score).setTextColor(Color.GRAY)
+            else findViewById<TextView>(R.id.tv_anime_score).setTextColor(Color.GRAY)*/
             if (animeInfo!!.genres.isNotEmpty()) findViewById<TextView>(R.id.tv_anime_genre).text = "Genre: " + animeInfo!!.genres[0].name
             findViewById<TextView>(R.id.tv_anime_episode).text = "Episodes: " + animeInfo!!.episodes.toString()
             findViewById<TextView>(R.id.tv_anime_status).text = "Status: " + animeInfo!!.status
@@ -90,9 +93,9 @@ class RandomAnimeActivity  : AppCompatActivity() {
             findViewById<TextView>(R.id.tv_anime_title).text = animeInfo!!.title
             Picasso.get().load(animeInfo!!.images.jpg.image_url).into(findViewById<ImageView>(R.id.iv_anime_image))
             findViewById<TextView>(R.id.tv_anime_score).text = animeInfo!!.score.toString() + "/10"
-            if (animeInfo!!.score < 4) findViewById<TextView>(R.id.tv_anime_score).setTextColor(Color.RED)
+            /*if (animeInfo!!.score < 4) findViewById<TextView>(R.id.tv_anime_score).setTextColor(Color.RED)
             else if (animeInfo!!.score > 7) findViewById<TextView>(R.id.tv_anime_score).setTextColor(Color.GREEN)
-            else findViewById<TextView>(R.id.tv_anime_score).setTextColor(Color.GRAY)
+            else findViewById<TextView>(R.id.tv_anime_score).setTextColor(Color.GRAY)*/
             if (animeInfo!!.genres.isNotEmpty()) findViewById<TextView>(R.id.tv_anime_genre).text = "Genre: " + animeInfo!!.genres[0].name
             findViewById<TextView>(R.id.tv_anime_episode).text = "Episodes: " + animeInfo!!.episodes.toString()
             findViewById<TextView>(R.id.tv_anime_status).text = "Status: " + animeInfo!!.status
@@ -100,4 +103,27 @@ class RandomAnimeActivity  : AppCompatActivity() {
         }
 
     }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.activity_anime_detail, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_view_anime -> {
+                viewAnimeOnMAL()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun viewAnimeOnMAL() {
+        val url = animeInfo!!.url
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
+    }
+
 }

@@ -19,8 +19,8 @@ class AnimeAdapter(private val onAnimeClick: (DisplayAnimeList) -> Unit,
     : RecyclerView.Adapter<AnimeAdapter.ViewHolder>() {
     var animeList: List<DisplayAnimeList> = listOf()
 
-    fun updateAnimeList(newAnimeList: List<DisplayAnimeList>) {
-        animeList = newAnimeList.toMutableList()
+    fun updateAnimeList(newAnimeList: List<DisplayAnimeList>?) {
+        animeList = newAnimeList!!.toMutableList()
         notifyDataSetChanged()
     }
 
