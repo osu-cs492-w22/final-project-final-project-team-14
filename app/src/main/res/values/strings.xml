@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">Anime App</string>
+    <string name="random_activity_name">Random Anime</string>
+    <string name="bookmarks_activity_name">My List</string>
+    <string name="details_activity_name">Anime Details</string>
+    <string name="settings_activity_name">Settings</string>
+
     <string name="action_random">Random Anime</string>
     <string name="action_next_random">Next ></string>
     <string name="score_label">Score: </string>

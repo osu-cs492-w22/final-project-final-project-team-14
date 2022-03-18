@@ -13,18 +13,22 @@
         android:theme="@style/Theme.AnimeThing">
         <activity
             android:name=".ui.AnimeDetailActivity"
+            android:label="@string/details_activity_name"
             android:parentActivityName=".ui.MainActivity"
             android:exported="false" />
         <activity
             android:name=".ui.RandomAnimeActivity"
+            android:label="@string/random_activity_name"
             android:parentActivityName=".ui.MainActivity"
             android:exported="false" />
         <activity
             android:name=".ui.AnimeBookmarksActivity"
+            android:label="@string/bookmarks_activity_name"
             android:parentActivityName=".ui.MainActivity"
             android:exported="false" />
         <activity
             android:name=".ui.SettingsActivity"
+            android:label="@string/settings_activity_name"
             android:exported="false"
             android:parentActivityName=".ui.MainActivity"/>
         <activity
