@@ -3,7 +3,6 @@ package com.example.animething.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
@@ -28,6 +27,8 @@ class MainActivity : AppCompatActivity() {
     private val bookmarksViewModel: AnimeBookmarkViewModel by viewModels()
     private lateinit var bookmarkNavButton: Button
 
+    private lateinit var randomAnimeNavButton: Button
+
     private lateinit var binding: ActivityMainBinding
     lateinit var viewModel: AnimeViewModel
     val animeService = AnimeService.create()
@@ -42,6 +43,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel = ViewModelProvider(this, AnimeViewModelFactory(AnimeRepository(animeService))).get(AnimeViewModel::class.java)
         //binding.animeRecyclerView.adapter = adapter
+
+        // Random Anime Button Listener
+        randomAnimeNavButton = findViewById(R.id.random_nav_button)
+        randomAnimeNavButton.setOnClickListener {
+            viewModel.getRandomAnime()
+            val intent = Intent(this, RandomAnimeActivity::class.java).apply {
+                putExtra(RANDOM_ANIME_INFO, viewModel.randomAnime.value)
+            }
+            startActivity(intent)
+        }
 
         //test bookmark navigation button. Change this to work with the bottom nav bar when it's made!
         bookmarkNavButton = findViewById(R.id.bookmark_nav_button)
@@ -100,7 +111,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.activity_main, menu)
         return true
     }
@@ -121,7 +132,7 @@ class MainActivity : AppCompatActivity() {
             putExtra(RANDOM_ANIME_INFO, viewModel.randomAnime.value)
         }
         startActivity(intent)
-    }
+    }*/
 
     // >>> MANAGE BOOKMARKING/BOOKMARK STATE ON MAINACTIVITY <<<
     // can be called in two states

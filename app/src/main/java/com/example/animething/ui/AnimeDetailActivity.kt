@@ -2,7 +2,6 @@ package com.example.animething.ui
 
 import android.graphics.Color
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -32,7 +31,7 @@ class AnimeDetailActivity : AppCompatActivity() {
             if (animeInfo!!.score < 4) findViewById<TextView>(R.id.tv_anime_score).setTextColor(Color.RED)
             if (animeInfo!!.score > 7) findViewById<TextView>(R.id.tv_anime_score).setTextColor(Color.GREEN)
             if (animeInfo!!.genres.isNotEmpty()) findViewById<TextView>(R.id.tv_anime_genre).text = "Genre: " + animeInfo!!.genres[0].name
-            findViewById<TextView>(R.id.tv_anime_episode).text = "Episode: " + animeInfo!!.episodes.toString()
+            findViewById<TextView>(R.id.tv_anime_episode).text = "Episodes: " + animeInfo!!.episodes.toString()
             findViewById<TextView>(R.id.tv_anime_status).text = "Status: " + animeInfo!!.status
             findViewById<TextView>(R.id.tv_anime_synopsis).text = animeInfo!!.synopsis
 
