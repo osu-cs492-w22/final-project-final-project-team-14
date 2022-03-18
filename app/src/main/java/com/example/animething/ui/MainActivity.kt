@@ -116,17 +116,12 @@ class MainActivity : AppCompatActivity() {
                     getString(R.string.pref_order_by_key),
                     null
                 )
-                doRepoSearch(query, order.toString())
+                doAnimeSearch(query, order.toString(), adapter)
             }
         }
     }
 
-    fun doRepoSearch(q: String, order: String) {
-
-        val adapter = AnimeAdapter(::onAnimeClick,
-            ::bookmarkStateManager,
-            bookmarksViewModel,
-            this@MainActivity)
+    fun doAnimeSearch(q: String, order: String, adapter: AnimeAdapter) {
 
         Log.d("What is order?", println(order).toString())
         val url = "https://api.jikan.moe/v4/anime?q=$q&order_by=$order"
