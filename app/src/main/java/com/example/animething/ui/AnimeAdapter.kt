@@ -1,4 +1,5 @@
 package com.example.animething.ui
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,7 +37,9 @@ class AnimeAdapter(private val onAnimeClick: (DisplayAnimeList) -> Unit,
         //Catch and handle the entires shown on mainActivity to properly show their bookmark state
         bookmarksViewModel.animeBookmarks.observe(mainLifecycle) { bookmarks ->
             if (bookmarks != null) {
-                bookmarkStateManager(holder.bookmarkButton, animeList[position], 1)
+                if (position < animeList.size) {
+                    bookmarkStateManager(holder.bookmarkButton, animeList[position], 1)
+                }
             }
         }
 

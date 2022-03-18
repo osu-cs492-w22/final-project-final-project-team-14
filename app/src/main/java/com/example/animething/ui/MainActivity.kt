@@ -148,6 +148,8 @@ class MainActivity : AppCompatActivity() {
 
         searchResultsListRV.visibility = View.INVISIBLE
         requestQueue.add(req)
+
+        this.setTitle("Results for \"" + q + "\"");
     }
 
     override fun onResume() {
