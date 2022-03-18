@@ -1,11 +1,9 @@
 <resources>
     <string name="app_name">AnimeThing</string>
-    <string name="action_setting">Settings</string>
-    <string name="action_share">View</string>
+    <string name="action_random">Random Anime</string>
+    <string name="action_settings">Settings</string>
 
-    <string name="action_view_anime">View anime on MyAnimeList</string>
-    <string name="action_view_anime_error">Try installing a web browser.</string>
-
+    <string name="score_label">Score: </string>
 
     <string name="pref_order_by_anime">Search Settings</string>
 

@@ -2,7 +2,6 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <PreferenceCategory android:title="@string/pref_order_by_anime">
         <ListPreference
             android:title="@string/pref_order_by_name"
@@ -13,5 +12,4 @@
             android:dialogTitle="@string/pref_order_by_title"
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
-
 </PreferenceScreen>

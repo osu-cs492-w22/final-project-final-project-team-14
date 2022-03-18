@@ -10,7 +10,8 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
+import android.widget.ImageButton
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
@@ -23,30 +24,33 @@ import com.android.volley.toolbox.Volley
 import com.example.animething.R
 import com.example.animething.data.AnimeRepository
 import com.example.animething.data.DisplayAnimeList
-import com.example.animething.data.SearchAnime
 import com.example.animething.data.TopAnime
 import com.example.animething.databinding.ActivityMainBinding
 import com.example.animething.service.AnimeService
-import com.example.animething.service.SearchService
-import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 //Reference: The ViewModel Architecture implementation is based on an online tutorial source
 //Source: https://howtodoandroid.com/mvvm-retrofit-recyclerview-kotlin/
 
+
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+    //bookmarks viewmodel and nav-to button
+    private val bookmarksViewModel: AnimeBookmarkViewModel by viewModels()
+    private lateinit var bookmarkNavButton: Button
     private lateinit var requestQueue: RequestQueue
     private lateinit var searchResultsListRV: RecyclerView
+//    val testAdapter = AnimeAdapter(::onAnimeClick,
+//        ::bookmarkStateManager,
+//        bookmarksViewModel,
+//        this@MainActivity)
+    private lateinit var binding: ActivityMainBinding
     lateinit var viewModel: AnimeViewModel
     val animeService = AnimeService.create()
-    val searchService = SearchService.create()
-    val adapter = AnimeAdapter(::onAnimeClick)
+//  If you're wondering why the adapter isn't here, bookmark functionality currently works
+//    by passing bookmarksViewModel into the adapter, and calling that isn't allowed before
+//    onCreate. Basically, the adapter has moved down into onCreate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,19 +64,40 @@ class MainActivity : AppCompatActivity() {
         searchResultsListRV.layoutManager = GridLayoutManager(this@MainActivity, 3)
         searchResultsListRV.setHasFixedSize(true)
 
-        viewModel = ViewModelProvider(this, AnimeViewModelFactory(AnimeRepository(animeService, searchService))).get(AnimeViewModel::class.java)
+        viewModel = ViewModelProvider(this, AnimeViewModelFactory(AnimeRepository(animeService))).get(AnimeViewModel::class.java)
+        //binding.animeRecyclerView.adapter = adapter
 
-        viewModel.animes.observe(this, Observer {
-            adapter.updateAnimeList(it)
-        })
-        viewModel.getAnimes()
+        //test bookmark navigation button. Change this to work with the bottom nav bar when it's made!
+        bookmarkNavButton = findViewById(R.id.bookmark_nav_button)
+        bookmarkNavButton.setOnClickListener {
+            val intent = Intent(this, AnimeBookmarksActivity::class.java)
+            startActivity(intent)
+        }
+
+        //adapter was moved here for bookmarks to work
+        val adapter = AnimeAdapter(::onAnimeClick,
+            ::bookmarkStateManager,
+            bookmarksViewModel,
+            this@MainActivity)
 
         // View (binding) is used to interact with views and replaces findViewById
         binding.apply {
+            //val animeService = AnimeService.create()
+            //val call = animeService.getTopAnime()
+            //viewModel.getAnimes()
+
             animeRecyclerView.layoutManager = GridLayoutManager(this@MainActivity, 3)
             animeRecyclerView.setHasFixedSize(true)
             animeRecyclerView.adapter = adapter
         }
+
+        viewModel.animes.observe(this, Observer {
+
+            adapter.updateAnimeList(it)
+        })
+
+        viewModel.getAnimes()
+        viewModel.getRandomAnime()
 
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this)
         val searchBoxes: EditText = findViewById(R.id.search_anime_input)
@@ -84,13 +109,95 @@ class MainActivity : AppCompatActivity() {
                     getString(R.string.pref_order_by_key),
                     null
                 )
-                doRepoSearch(query, order.toString())
+                doAnimeSearch(query, order.toString(), adapter)
+            }
+        }
+
+    }
+
+    override fun onResume() {
+        Log.d("MainActivity", "onResume")
+        super.onResume()
+    }
+
+    override fun onPause() {
+        Log.d("MainActivity", "onPause")
+        super.onPause()
+    }
+
+    private fun onAnimeClick(anime: DisplayAnimeList){
+        val intent = Intent(this, AnimeDetailActivity::class.java).apply {
+            putExtra(EXTRA_ANIME_INFO, anime)
+        }
+        startActivity(intent)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.activity_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.action_random -> {
+                randomAnime()
+                true
+            }
+            R.id.action_settings -> {
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun randomAnime(){
+        viewModel.getRandomAnime()
+        val intent = Intent(this, RandomAnimeActivity::class.java).apply {
+            putExtra(RANDOM_ANIME_INFO, viewModel.randomAnime.value)
+        }
+        startActivity(intent)
+    }
+
+    // >>> MANAGE BOOKMARKING/BOOKMARK STATE ON MAINACTIVITY <<<
+    // can be called in two states
+    // state 0 is intended to catch the bookmarking being saved/deleted (clicked on)
+    // state 1 is intended to display the correct state of the bookmark to the *scrolling* user
+
+    //This code doesn't double check with the database before taking actions, but that should be fine for the database,
+    //  and will work better for the sake of not overloading the API I guess?
+    private fun bookmarkStateManager(buttonClicked: ImageButton, animeSelected: DisplayAnimeList, state: Int) {
+        //state for clicking on the bookmark button
+        if (state == 0) {
+//        Log.d("d", "Bookmark clicked for " + animeSelected.title)
+            val buttonDrawable = buttonClicked.drawable.constantState
+            val internalBlankState = resources.getDrawable(R.drawable.ic_baseline_bookmark_24, null).constantState
+            val internalSavedState = resources.getDrawable(R.drawable.ic_baseline_bookmark_24_selected, null).constantState
+            if (buttonDrawable!!.equals(internalBlankState)) {
+//                Log.d("d", "Save")
+                buttonClicked.setImageResource(R.drawable.ic_baseline_bookmark_24_selected)
+                bookmarksViewModel.saveAnime(animeSelected)
+            }
+            else if (buttonDrawable!!.equals(internalSavedState)) {
+//                Log.d("d", "Delete")
+                buttonClicked.setImageResource(R.drawable.ic_baseline_bookmark_24)
+                bookmarksViewModel.deleteAnime(animeSelected)
+            }
+        }
+        //state for scrolling up/down the grid list
+        else if (state == 1) {
+            if (bookmarksViewModel.animeBookmarks.value!!.any{ it.title == animeSelected.title }) {
+//                Log.d("d","--------------- found pair")
+                buttonClicked.setImageResource(R.drawable.ic_baseline_bookmark_24_selected)
+            }
+            else if (bookmarksViewModel.animeBookmarks.value!!.none{ it.title == animeSelected.title }) {
+                buttonClicked.setImageResource(R.drawable.ic_baseline_bookmark_24)
             }
         }
     }
 
-
-    fun doRepoSearch(q: String, order: String) {
+    fun doAnimeSearch(q: String, order: String, adapter: AnimeAdapter) {
         Log.d("What is order?", println(order).toString())
         val url = "https://api.jikan.moe/v4/anime?q=$q&order_by=$order"
 
@@ -104,9 +211,9 @@ class MainActivity : AppCompatActivity() {
             Request.Method.GET,
             url,
             {
-                var results = jsonAdapter.fromJson(it)
+                var results = jsonAdapter.nullSafe().fromJson(it)
                 Log.d("MainActivity", results.toString())
-                adapter.updateAnimeList(results?.data)
+                adapter.updateAnimeList(results!!.data)
                 searchResultsListRV.visibility = View.VISIBLE
             },
             {
@@ -118,37 +225,7 @@ class MainActivity : AppCompatActivity() {
         requestQueue.add(req)
     }
 
-    override fun onResume() {
-        Log.d("MainActivity", "onResume")
-        super.onResume()
-    }
-
-    override fun onPause() {
-        Log.d("MainActivity", "onPause")
-        super.onPause()
-    }
 
 
-    private fun onAnimeClick(anime: DisplayAnimeList) {
-        val intent = Intent(this, AnimeDetailActivity::class.java).apply {
-            putExtra(EXTRA_ANIME_INFO, anime)
-        }
-        startActivity(intent)
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.activity_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_settings -> {
-                val intent = Intent(this, SettingsActivity::class.java)
-                startActivity(intent)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 }

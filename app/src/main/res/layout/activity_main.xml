@@ -35,6 +35,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+    <!--bookmarks button, replace this with a nav bar maybe at some point?-->
+    <Button
+        android:id="@+id/bookmark_nav_button"
+        android:text="Bookmarks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/animeRecyclerView"
@@ -46,6 +54,5 @@
         android:layout_width="match_parent"
         android:layout_height="0dp" >
     </androidx.recyclerview.widget.RecyclerView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

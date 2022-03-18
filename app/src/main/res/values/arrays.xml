@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_sort_entries">
+        <item>@string/pref_order_by_title</item>
+        <item>@string/pref_order_by_rating</item>
+        <item>@string/pref_order_by_score</item>
+        <item>@string/pref_order_by_rank</item>
+        <item>@string/pref_order_by_popularity</item>
+    </string-array>
+
+    <string-array name="pref_sort_val">
+        <item>@string/pref_order_by_title_val</item>
+        <item>@string/pref_order_by_rating_val</item>
+        <item>@string/pref_order_by_score_val</item>
+        <item>@string/pref_order_by_rank_val</item>
+        <item>@string/pref_order_by_popularity_val</item>
+    </string-array>
+</resources>
