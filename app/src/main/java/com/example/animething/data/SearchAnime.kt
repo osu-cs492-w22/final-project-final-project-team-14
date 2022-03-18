@@ -2,9 +2,7 @@ package com.example.animething.data
 
 import java.io.Serializable
 
-
-data class TopAnime(
-    val data: List<DisplayAnimeList>
+data class SearchAnime(
+    val searchedAnime: List<DisplayAnimeList>
 ) : Serializable
-
 

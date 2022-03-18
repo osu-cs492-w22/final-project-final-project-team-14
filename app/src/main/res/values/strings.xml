@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">AnimeThing</string>
+    <string name="action_setting">Settings</string>
+    <string name="action_share">View</string>
+
+    <string name="action_view_anime">View anime on MyAnimeList</string>
+    <string name="action_view_anime_error">Try installing a web browser.</string>
+
+
+    <string name="pref_order_by_anime">Search Settings</string>
+
+    <string name="pref_order_by_name">Order Anime</string>
+    <string name="pref_order_by_key" translatable="false">order_by</string>
+
+    <string name="pref_order_by_title">Title</string>
+    <string name="pref_order_by_rating">Rating</string>
+    <string name="pref_order_by_score">Score</string>
+    <string name="pref_order_by_rank">Rank</string>
+    <string name="pref_order_by_popularity">Popularity</string>
+
+
+    <string name="pref_order_by_title_val" translatable="false">title</string>
+    <string name="pref_order_by_rating_val" translatable="false">rating</string>
+    <string name="pref_order_by_score_val" translatable="false">score</string>
+    <string name="pref_order_by_rank_val" translatable="false">rank</string>
+    <string name="pref_order_by_popularity_val" translatable="false">popularity</string>
+
+    <string name="pref_order_by_default">@string/pref_order_by_title</string>
+
 </resources>
