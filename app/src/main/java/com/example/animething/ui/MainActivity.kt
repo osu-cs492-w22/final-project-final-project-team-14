@@ -1,17 +1,21 @@
 package com.example.animething.ui
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
@@ -93,7 +97,6 @@ class MainActivity : AppCompatActivity() {
             this@MainActivity)
 
         viewModel.animes.observe(this, Observer {
-
             adapter.updateAnimeList(it)
         })
         viewModel.getAnimes()
@@ -150,6 +153,7 @@ class MainActivity : AppCompatActivity() {
         requestQueue.add(req)
 
         this.setTitle("Results for \"" + q + "\"");
+        hideKeyboard(currentFocus ?: View(this))
     }
 
     override fun onResume() {
@@ -179,6 +183,15 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings -> {
                 val intent = Intent(this, SettingsActivity::class.java)
                 startActivity(intent)
+                true
+            }
+            R.id.action_home -> {
+                /*finish();
+                startActivity(getIntent());*/
+                viewModel.getAnimes()
+                setTitle("Anime App")
+                findViewById<TextView>(R.id.search_anime_input).text = ""
+                findViewById<TextView>(R.id.search_anime_input).isSelected = false
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -220,5 +233,10 @@ class MainActivity : AppCompatActivity() {
                 buttonClicked.setImageResource(R.drawable.ic_baseline_bookmark_24)
             }
         }
+    }
+
+    fun Context.hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }
